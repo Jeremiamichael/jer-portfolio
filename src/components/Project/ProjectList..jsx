@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
-import { containerAnimation } from './Animation.js';
+import { containerAnimation } from './Animations';
 import './Projects.css';
 
 export const ProjectsList = ({ projects }) => (

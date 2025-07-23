@@ -531,6 +531,17 @@ section {
   color: #000 !important;
 }
 
+.skills-card .text-muted {
+  color: #adb5bd !important;
+  opacity: 0.8;
+}
+
+/* Fix skills section description text visibility */
+.skills-section .text-muted {
+  color: #b8b8b8 !important;
+  opacity: 0.9;
+}
+
 /* Styling untuk Category Section */
 .category-icon {
   width: 40px !important;          
@@ -616,11 +627,12 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
+  height: 120px;
   background: linear-gradient(180deg, 
-    rgba(18, 18, 18, 0.8) 0%,
-    rgba(18, 18, 18, 0.5) 25%,
-    rgba(18, 18, 18, 0.2) 50%,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.1) 80%,
     transparent 100%
   );
   z-index: 1;

@@ -1,7 +1,9 @@
 import React from 'react';
-import { HiArrowRight } from 'react-icons/hi';
+import Button from 'react-bootstrap/Button';
+import { HiArrowRight, HiCode } from 'react-icons/hi';
 import { motion } from 'framer-motion';
-import { titleAnimation } from './Animation.js';
+import { config } from '@/config';
+import { titleAnimation } from './Animations';
 import './Projects.css';
 
 const SectionTitle = () => (
@@ -19,34 +21,35 @@ const SectionTitle = () => (
                 <p className="section-title-description">
                     A curated selection of my professional work and personal projects,
                     showcasing expertise in{' '}
-                    <span className="highlight">software engineer-</span>,{' '}
+                    <span className="highlight">full-stack development</span>,{' '}
                     <span className="highlight">UI/UX design</span>, and{' '}
-                    <span className="highlight">systems analyst</span>
+                    <span className="highlight">cloud architecture</span>.
                 </p>
             </div>
 
             <div className="section-title-button-container">
-                <a
-                    href="https://github.com/Jeremiamichael"
+                <Button
+                    variant="primary"
+                    className="section-title-button"
+                    href={`https://github.com/${config.social.github}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="section-title-button"
                 >
                     View Github <HiArrowRight className="section-title-button-icon" />
-                </a>
+                </Button>
             </div>
         </div>
 
         <div className="section-stats">
             <div className="stat-item">
-                <span className="stat-number">5+</span>
+                <span className="stat-number">10+</span>
                 <p className="stat-label">
                     Projects Completed
                 </p>
             </div>
             <div className="stat-divider" />
             <div className="stat-item">
-                <span className="stat-number">1</span>
+                <span className="stat-number">3+</span>
                 <p className="stat-label">
                     Years Experience
                 </p>

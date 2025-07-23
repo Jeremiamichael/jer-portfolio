@@ -34,13 +34,15 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 150px;
   background: linear-gradient(180deg, 
     transparent 0%,
-    rgba(170, 54, 124, 0.1) 30%,
-    rgba(170, 54, 124, 0.3) 60%,
-    rgba(170, 54, 124, 0.5) 80%,
-    rgba(170, 54, 124, 0.7) 100%
+    rgba(170, 54, 124, 0.05) 20%,
+    rgba(170, 54, 124, 0.15) 40%,
+    rgba(170, 54, 124, 0.35) 60%,
+    rgba(170, 54, 124, 0.55) 80%,
+    rgba(170, 54, 124, 0.8) 95%,
+    #AA367C 100%
   );
   z-index: 5;
   pointer-events: none;
@@ -524,6 +526,36 @@
   .project-card-horizontal {
     gap: 16px;
   }
+}
+
+/* Image Loading Placeholder */
+.project-image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(170, 54, 124, 0.3);
+  border-top: 3px solid #AA367C;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.project-image.loaded {
+  opacity: 1 !important;
 }
 
 /* Scrollbar hide utility */

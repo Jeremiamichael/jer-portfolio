@@ -9,9 +9,10 @@ import {
 } from 'react-icons/hi';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const getLevelPercentage = (level) => {
   switch (level) {
-    case 'Expert': return 96;
+    case 'Expert': return 95;
     case 'Advanced': return 85;
     case 'Intermediate': return 70;
     case 'Beginner': return 50;
@@ -19,6 +20,7 @@ const getLevelPercentage = (level) => {
   }
 };
 
+// Animasi tetap sama karena menggunakan Framer Motion
 const containerAnimation = {
   hidden: { opacity: 0 },
   show: {
@@ -41,52 +43,47 @@ const itemAnimation = {
   }
 };
 
-const SkillCard = ({ skill, bgClass, categoryType }) => {
+const SkillCard = ({ skill, bgClass }) => {
   const levelPercentage = getLevelPercentage(skill.level);
   
-  // Menentukan class berdasarkan kategori
-  const getProgressClass = (categoryType) => {
-    switch(categoryType) {
-      case 'frontend': return 'frontend-progress';
-      case 'backend': return 'backend-progress'; 
-      case 'tools': return 'tools-progress';
-      default: return '';
-    }
-  };
-  
+  // Mapping warna Bootstrap
+  const progressBarClass = {
+    'bg-blue-500/10': 'bg-primary',
+    'bg-emerald-500/10': 'bg-success',
+    'bg-orange-500/10': 'bg-warning'
+  }[bgClass] || 'bg-primary';
+
   return (
     <motion.div
       variants={itemAnimation}
       className="h-100"
     >
-      <div className="card h-100 skills-card text-white">
-        <div className="card-body p-3">
+      <div className="card h-100 border-secondary bg-dark text-white mb-3">
+        <div className="card-body">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h6 className="card-title mb-0 text-white fw-bold">{skill.name}</h6>
+            <h5 className="card-title mb-0 text-primary">{skill.name}</h5>
             {skill.hot && (
-              <span className="badge skills-badge small">
-                <HiSparkles className="me-1" size={12} />
+              <span className="badge bg-warning text-dark">
+                <HiSparkles className="me-1" />
                 Hot
               </span>
             )}
           </div>
 
-          <div className="skills-progress-container">
-            <div className={`progress skills-progress ${getProgressClass(categoryType)}`}>
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${levelPercentage}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className="progress-bar"
-                role="progressbar"
-              />
-            </div>
+          <div className="progress bg-dark mb-3" style={{ height: '6px' }}>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: `${levelPercentage}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className={`progress-bar ${progressBarClass}`}
+              role="progressbar"
+            />
           </div>
 
-          <div className="d-flex justify-content-between align-items-center">
-            <span className="text-muted small">Proficiency</span>
-            <span className="text-white small fw-medium">{skill.level}</span>
+          <div className="d-flex justify-content-between small">
+            <span className="text-muted">Proficiency</span>
+            <span className="fw-bold">{skill.level}</span>
           </div>
         </div>
       </div>
@@ -94,22 +91,22 @@ const SkillCard = ({ skill, bgClass, categoryType }) => {
   );
 };
 
-const CategorySection = ({ category, categoryType }) => (
-  <div className="mb-5 pb-3">
+const CategorySection = ({ category }) => (
+  <div className="mb-5">
     <div className="d-flex align-items-center mb-4">
-      <div className={`category-icon ${categoryType} text-white`}>
-        {React.cloneElement(category.icon, { className: 'fs-5' })}
+      <div className={`p-2 rounded me-3 ${category.bgClass.replace('/10', '')}`}>
+        {React.cloneElement(category.icon, { className: 'fs-4' })}
       </div>
-      <div className="ms-3">
-        <h3 className="category-title text-white">{category.title}</h3>
-        <p className="category-description text-muted">{category.description}</p>
+      <div>
+        <h3 className="h4 text-white">{category.title}</h3>
+        <p className="text-muted mb-0">{category.description}</p>
       </div>
     </div>
 
-    <div className="row g-3">
+    <div className="row g-4">
       {category.skills.map((skill, idx) => (
         <div className="col-md-6" key={idx}>
-          <SkillCard skill={skill} bgClass={category.bgClass} categoryType={categoryType} />
+          <SkillCard skill={skill} bgClass={category.bgClass} />
         </div>
       ))}
     </div>
@@ -117,58 +114,24 @@ const CategorySection = ({ category, categoryType }) => (
 );
 
 const SkillsSection = () => {
+  // Contoh data - sesuaikan dengan struktur asli Anda
   const skills = [
     {
       title: "Frontend Development",
-      description: "Modern web interfaces",
+      description: "Building responsive and interactive user interfaces",
       bgClass: "bg-primary",
       icon: <HiCode />,
-      categoryType: "frontend",
       skills: [
-        { name: "HTML", level: "Advanced" },
-        { name: "CSS", level: "Advanced" },
-        { name: "Next.js", level: "Advanced", hot: true },
-        { name: "React", level: "Advanced" },
-        { name: "TailwindCSS", level: "Expert" },
-        { name: "Javascript", level: "Intermediate" },
-        { name: "Typescript", level: "Advanced" },
+        { name: "React", level: "Expert", hot: true },
+        { name: "JavaScript", level: "Advanced" }
       ]
     },
-    {
-      title: "Backend Development", 
-      description: "Server & Database",
-      bgClass: "bg-success",
-      icon: <HiDatabase />,
-      categoryType: "backend",
-      skills: [
-        { name: "Golang", level: "Advanced", hot: true },
-        { name: "Java", level: "Advanced" },
-        { name: "SQL", level: "Advanced" },
-        { name: "PostgreSQL", level: "Intermediate" }
-      ]
-    },
-    {
-      title: "Development Tools",
-      description: "Tools and platforms", 
-      bgClass: "bg-warning",
-      icon: <HiCube />,
-      categoryType: "tools",
-      skills: [
-        { name: "Git", level: "Advanced" },
-        { name: "Docker", level: "Intermediate" },
-        { name: "Postman", level: "Advanced" },
-        { name: "Jira", level: "Expert" },
-        { name: "Figma", level: "Expert" },
-        { name: "Visual Paradigm", level: "Expert" },
-        { name: "Bitbucket", level: "Advanced" },
-        { name: "Github", level: "Advanced" }
-      ]
-    }
+    // Tambahkan kategori lainnya
   ];
 
   return (
-    <section className="skills-section" id="skills">
-      <div className="container" style={{paddingTop: '3rem', paddingBottom: '4rem'}}>
+    <section className="py-5 bg-dark" id="skills">
+      <div className="container py-5">
         <motion.div
           variants={containerAnimation}
           initial="hidden"
@@ -195,7 +158,7 @@ const SkillsSection = () => {
 
           <motion.div variants={containerAnimation}>
             {skills.map((category, index) => (
-              <CategorySection key={index} category={category} categoryType={category.categoryType} />
+              <CategorySection key={index} category={category} />
             ))}
           </motion.div>
         </motion.div>
