@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/header-img.svg";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
+import jerImg from "../assets/img/jer.png";
+import { ArrowDownCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
-import ProfileCard from "./ProfileCard/ProfileCard.jsx";
-import avatarUrl from '../assets/img/jer.png'; 
+import ProfileCard from './ProfileCard/ProfileCard.jsx';
+
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -48,18 +48,32 @@ export const Banner = () => {
     }
   }
 
+  const downloadResume = () => {
+
+    const resumeUrl = '/assets/CV - Jeremia Paulus.pdf';
+    
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'CV - Jeremia Paulus.pdf';
+    link.target = '_blank';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <section className="banner" id="home">
       <Container>
-        <Row className="aligh-items-center">
+        <Row className="aligh-items-center banner-row"> 
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Jer's Portfolio</span>
+              <div className={isVisible ? "animate__animated animate__fadeIn banner-content" : "banner-content"}> {/* Menambahkan class banner-content */}
+                <span> </span>
                 <h1>{`Hi! I'm Jeremia Paulus`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Engineer", "Systems Analyst", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>A forward-thinking and motivated undergraduate student with excellent problem-solving, critical thinking, and clear communication. Recognized for the ability to effectively interact with varied teams and adapt to changing situations in order to achieve common objectives. I'm passionate about leveraging technology to develop clever, practical solutions that improve how things function. Highly proactive and detail-oriented, dedicated to producing high-quality solutions and increasing operational efficiency.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
+                  <p> Hi, I’m Jeremia Johanes Mikhael Paulus. I’m passionate about bringing ideas to life through beautifully crafted software. I focus on creating intuitive user experiences, thoughtful architecture, and writing clean, high-quality code in everything I build.</p>
+                  <button onClick={downloadResume}>Download My Resume <ArrowDownCircle size={25} /></button>
               </div>}
             </TrackVisibility>
           </Col>
@@ -67,19 +81,18 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn profile-card-wrapper" : "profile-card-wrapper"}>
-                   <ProfileCard
-                    className="pc-card"
+                  <ProfileCard
                     name="Jeremia Paulus"
-                    title="Software Engineer"
-                    handle="jeremia.jmp"
+                    title="PROGRAMMER"
+                    handle="jeremia.mjp"
                     status="Online"
-                    avatarUrl={avatarUrl}
+                    avatarUrl={jerImg}
                     showUserInfo={true}
                     enableTilt={true}
                   />
                 </div>}
             </TrackVisibility>
-          </Col>
+          </Col>  
         </Row>
       </Container>
     </section>

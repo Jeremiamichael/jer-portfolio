@@ -42,9 +42,9 @@ const ProfileCardComponent = ({
   className = "",
   enableTilt = true,
   miniAvatarUrl,
-  name = "Javi A. Torres",
-  title = "Software Engineer",
-  handle = "javicodes",
+  name = "Jeremia Paulus",
+  title = "PROGRAMMER",
+  handle = "jeremia.mjp",
   status = "Online",
   showUserInfo = true
 }) => {
@@ -273,15 +273,7 @@ const ProfileCardComponent = ({
                     <div className="pc-handle">@{handle}</div>
                     <div className="pc-status">{status}</div>
                   </div>
-                </div>
-                <button
-                  className="pc-contact-btn"
-                  style={{ pointerEvents: "auto" }}
-                  type="button"
-                  aria-label={`Contact ${name || "user"}`}
-                >
-
-                </button>
+                </div> 
               </div>
             )}
           </div>
