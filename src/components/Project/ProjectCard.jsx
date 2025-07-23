@@ -1,21 +1,77 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaDemocrat, FaExternalLinkAlt, FaGithub, FaPlayCircle } from 'react-icons/fa';
-import { itemAnimation } from './Animation.js';
+import { FaExternalLinkAlt, FaPlayCircle } from 'react-icons/fa';
 import './Projects.css';
 
-export const ProjectCard = ({ project, index }) => (
+const itemAnimation = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.23, 1, 0.32, 1]
+    }
+  }
+};
+
+export const ProjectCard = ({ project, index }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInView, setIsInView] = useState(false);
+  const imgRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleImageError = () => {
+    setIsLoading(false);
+  };
+
+  return (
     <motion.div
         variants={itemAnimation}
         className="project-card-horizontal"
     >
-        <div className="project-image-section">
+        <div className="project-image-section" ref={imgRef}>
             <div className="project-image-wrapper">
-                <img
-                    src={project.image}
-                    alt={project.title}
-                    className="project-image"
-                />
+                {/* Loading placeholder */}
+                {isLoading && (
+                    <div className="project-image-placeholder">
+                        <div className="loading-spinner"></div>
+                    </div>
+                )}
+                
+                
+                {isInView && (
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`project-image ${!isLoading ? 'loaded' : ''}`}
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                        style={{ opacity: isLoading ? 0 : 1 }}
+                        loading="lazy"
+                    />
+                )}
                 <div className="project-image-overlay" />
             </div>
         </div>
@@ -75,3 +131,4 @@ export const ProjectCard = ({ project, index }) => (
         </div>
     </motion.div>
 );
+}

@@ -8,7 +8,7 @@ export const Contact = () => {
   const profileInfo = {
     name: "Jeremia Johanes Mikhael Paulus",
     title: "Software Engineer, Systems Analyst, UI&UX Designer",
-    university: "Universitas Bina Nusantara",
+    university: "BINUS UNIVERSITY",
     location: "Jakarta, Indonesia",
     email: "jeremia.mjp@gmail.com",
     phone: "+62 812-9719-5936",
@@ -53,7 +53,11 @@ export const Contact = () => {
                         
                         <div className="profile-item">
                           <FaEnvelope className="profile-icon" />
-                          <a href={`mailto:${profileInfo.email}`} className="profile-link">
+                          <a 
+                            href={`https://mail.google.com/mail/?view=cm&to=${profileInfo.email}&su=Hello from Portfolio Website&body=Hi Jeremia,%0D%0A%0D%0AI found your portfolio website and would like to connect with you.%0D%0A%0D%0ABest regards,`}
+                            className="profile-link"
+                            title="Send email to jeremia.mjp@gmail.com"
+                          >
                             {profileInfo.email}
                           </a>
                         </div>
