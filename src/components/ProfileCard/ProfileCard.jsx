@@ -44,7 +44,7 @@ const ProfileCardComponent = ({
   miniAvatarUrl,
   name = "Jeremia Paulus",
   title = "PROGRAMMER",
-  handle = "jeremia.mjp",
+  handle = "jercodes",
   status = "Online",
   showUserInfo = true
 }) => {
@@ -241,8 +241,10 @@ const ProfileCardComponent = ({
     >
       <section ref={cardRef} className="pc-card">
         <div className="pc-inside">
+          <div className="pc-background-icons" />
           <div className="pc-shine" />
           <div className="pc-glare" />
+          <div className="pc-icon-overlay" />
           <div className="pc-content pc-avatar-content">
             <img
               className="avatar"

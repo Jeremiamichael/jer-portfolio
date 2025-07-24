@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import jerImg from "../assets/img/jer.png";
+import codeIcon from "../assets/img/code-icon.svg";
 import { ArrowDownCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 import ProfileCard from './ProfileCard/ProfileCard.jsx';
+import ShinyText from './ShinyText/ShinyText.jsx';
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -71,9 +73,13 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn banner-content" : "banner-content"}> {/* Menambahkan class banner-content */}
                 <span> </span>
-                <h1>{`Hi! I'm Jeremia Paulus`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Engineer", "Systems Analyst", "UI/UX Designer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p> Hi, I’m Jeremia Johanes Mikhael Paulus. I’m passionate about bringing ideas to life through beautifully crafted software. I focus on creating intuitive user experiences, thoughtful architecture, and writing clean, high-quality code in everything I build.</p>
-                  <button onClick={downloadResume}>Download My Resume <ArrowDownCircle size={25} /></button>
+                <h1>{`Hi! I'm Jeremia Paulus`}</h1>
+                <h2 className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Engineer", "Systems Analyst", "UI/UX Designer" ]'><span className="wrap">{text}</span></h2>
+                  <p> Hi, I'm Jeremia Johanes Mikhael Paulus. I'm passionate about bringing ideas to life through beautifully crafted software. I focus on creating intuitive user experiences, thoughtful architecture, and writing clean, high-quality code in everything I build.</p>
+                  <button onClick={downloadResume}>
+                    <ShinyText text="Download My Resume" disabled={false} speed={2} className="custom-class" />
+                    <ArrowDownCircle size={25} />
+                  </button>
               </div>}
             </TrackVisibility>
           </Col>
@@ -84,9 +90,10 @@ export const Banner = () => {
                   <ProfileCard
                     name="Jeremia Paulus"
                     title="PROGRAMMER"
-                    handle="jeremia.mjp"
+                    handle="jercodes"
                     status="Online"
                     avatarUrl={jerImg}
+                    iconUrl={codeIcon}
                     showUserInfo={true}
                     enableTilt={true}
                   />
